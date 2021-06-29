@@ -66,6 +66,19 @@
      <string>剪裁圖片</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="mResizeBtn">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>350</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>變更大小</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

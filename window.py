@@ -29,6 +29,9 @@ class Ui_MainWindow(object):
         self.mCutBtn = QtWidgets.QPushButton(self.centralwidget)
         self.mCutBtn.setGeometry(QtCore.QRect(230, 300, 171, 31))
         self.mCutBtn.setObjectName("mCutBtn")
+        self.mResizeBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.mResizeBtn.setGeometry(QtCore.QRect(230, 350, 171, 31))
+        self.mResizeBtn.setObjectName("mResizeBtn")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -48,6 +51,7 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "尚未選取圖片"))
         self.mFlipBtn.setText(_translate("MainWindow", "翻轉圖片"))
         self.mCutBtn.setText(_translate("MainWindow", "剪裁圖片"))
+        self.mResizeBtn.setText(_translate("MainWindow", "變更大小"))
 
 
 if __name__ == "__main__":

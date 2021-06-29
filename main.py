@@ -7,6 +7,7 @@ import cv2
 import numpy as np
 import window as ui
 import cut as cutui
+import resize as resizeui
 
 
 class Main(QMainWindow, ui.Ui_MainWindow):
@@ -17,9 +18,12 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.nums = 0
         self.store = "bin"
         self.cutparm = [0, 0, 0, 0]
+        self.resizewh = [0, 0]
+        self.resizescale = 0
         self.mChooseBtn.clicked.connect(self.image_choose)
         self.mFlipBtn.clicked.connect(self.flip_item)
         self.mCutBtn.clicked.connect(self.cut_item)
+        self.mResizeBtn.clicked.connect(self.resize_item)
 
     def image_choose(self):
         self.source, ok1 = QFileDialog.getOpenFileNames(self,
@@ -66,6 +70,38 @@ class Main(QMainWindow, ui.Ui_MainWindow):
             cv2.imwrite(storename, img)
             self.label.setText("Success")
 
+    def setResizeParm(self, type, input):
+        # type為True為x,y
+        if (type == True):
+            self.resizewh = [int(input[0]), int(input[1])]
+        else:
+            self.resizescale = float(input)
+
+    def resize_item(self):
+        self.store = QFileDialog.getExistingDirectory(self,
+                                                      "儲存位置",
+                                                      "./")
+        resize.show()
+
+    def continue_resize(self, type):
+        # type為True為x,y
+        if (type == True):
+            for i in range(self.nums):
+                img = cv2.imread(self.source[i])
+                img = IMG.resize_xy(img, self.resizewh[0], self.resizewh[1])
+                storetype = self.source[i].split('.')[1]
+                storename = self.store + "/" + str(i) + "." + storetype
+                cv2.imwrite(storename, img)
+            self.label.setText("Success")
+        else:
+            for i in range(self.nums):
+                img = cv2.imread(self.source[i])
+                img = IMG.resize(img, self.resizescale)
+                storetype = self.source[i].split('.')[1]
+                storename = self.store + "/" + str(i) + "." + storetype
+                cv2.imwrite(storename, img)
+            self.label.setText("Success")
+
     def closeEvent(self, event):
         QApplication.closeAllWindows()
 
@@ -91,10 +127,32 @@ class Cutwidget(QWidget, cutui.Ui_Form):
         self.close()
 
 
+class Resizewidget(QWidget, resizeui.Ui_Form):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)  # 初始化執行B視窗類下的 setupUi 函式
+        self.mConfirmBtn.clicked.connect(self.confirm)
+
+    def confirm(self):
+        type = True
+        if(self.mXYRadio.isChecked()):
+            tempParm = []
+            tempParm.append(self.mInputWidth.toPlainText())
+            tempParm.append(self.mInputHeight.toPlainText())
+
+        elif(self.mScaleRadio.isChecked()):
+            type = False
+            tempParm = self.mInputScale.toPlainText()
+        window.setResizeParm(type, tempParm)
+        window.continue_resize(type)
+        self.close()
+
+
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
     window = Main()
     cut = Cutwidget()
+    resize = Resizewidget()
     window.show()
     sys.exit(app.exec_())

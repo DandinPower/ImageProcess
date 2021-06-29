@@ -8,13 +8,15 @@ import numpy as np
 import window as ui
 import cut as cutui
 import resize as resizeui
+import type as typeui
 
 
 class Main(QMainWindow, ui.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.storetype = "png"
+        self.storetype = "Default"
+        self.start = False
         self.source = []
         self.nums = 0
         self.store = "bin"
@@ -25,6 +27,13 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.mFlipBtn.clicked.connect(self.flip_item)
         self.mCutBtn.clicked.connect(self.cut_item)
         self.mResizeBtn.clicked.connect(self.resize_item)
+        self.mTypeBtn.clicked.connect(self.go_type)
+
+    def setType(self, type):
+        self.storetype = type
+
+    def go_type(self):
+        editType.show()
 
     def image_choose(self):
         self.source, ok1 = QFileDialog.getOpenFileNames(self,
@@ -45,9 +54,12 @@ class Main(QMainWindow, ui.Ui_MainWindow):
             img = cv2.imread(self.source[i])
             img = IMG.flip(img)
             storetype = self.source[i].split('.')[1]
+            if(self.storetype != "Default"):
+                storetype = self.storetype
             storename = self.store + "/" + str(i) + "." + storetype
             cv2.imwrite(storename, img)
             self.label.setText("Success")
+        self.storetype = "Default"
 
     def setCutParm(self, input):
         self.cutparm[0] = int(input[0])
@@ -67,9 +79,12 @@ class Main(QMainWindow, ui.Ui_MainWindow):
             img = IMG.Cutimage(
                 img, self.cutparm[0], self.cutparm[1], self.cutparm[2], self.cutparm[3])
             storetype = self.source[i].split('.')[1]
+            if(self.storetype != "Default"):
+                storetype = self.storetype
             storename = self.store + "/" + str(i) + "." + storetype
             cv2.imwrite(storename, img)
             self.label.setText("Success")
+        self.storetype = "Default"
 
     def setResizeParm(self, type, input):
         # type為True為x,y
@@ -89,19 +104,26 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         if (type == True):
             for i in range(self.nums):
                 img = cv2.imread(self.source[i])
-                img = IMG.resize_xy(img, self.resizewh[0], self.resizewh[1])
+                img = IMG.resize_xy(
+                    img, self.resizewh[0], self.resizewh[1])
                 storetype = self.source[i].split('.')[1]
+                if(self.storetype != "Default"):
+                    storetype = self.storetype
                 storename = self.store + "/" + str(i) + "." + storetype
                 cv2.imwrite(storename, img)
             self.label.setText("Success")
+
         else:
             for i in range(self.nums):
                 img = cv2.imread(self.source[i])
                 img = IMG.resize(img, self.resizescale)
                 storetype = self.source[i].split('.')[1]
+                if(self.storetype != "Default"):
+                    storetype = self.storetype
                 storename = self.store + "/" + str(i) + "." + storetype
                 cv2.imwrite(storename, img)
             self.label.setText("Success")
+        self.storetype = "Default"
 
     def closeEvent(self, event):
         QApplication.closeAllWindows()
@@ -152,11 +174,30 @@ class Resizewidget(QWidget, resizeui.Ui_Form):
         self.close()
 
 
+class Typewidget(QWidget, typeui.Ui_Form):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)  # 初始化執行B視窗類下的 setupUi 函式
+        self.mConfirmBtn.clicked.connect(self.confirm)
+
+    def confirm(self):
+        if(self.mPngRadio.isChecked()):
+            window.setType("png")
+        elif(self.mJpgRadio.isChecked()):
+            window.setType("Jpg")
+        elif(self.mBmpRadio.isChecked()):
+            window.setType("Bmp")
+        else:
+            window.setType("Default")
+        self.close()
+
+
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
     window = Main()
     cut = Cutwidget()
     resize = Resizewidget()
+    editType = Typewidget()
     window.show()
     sys.exit(app.exec_())

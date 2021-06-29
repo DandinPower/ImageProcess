@@ -14,6 +14,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.storetype = "png"
         self.source = []
         self.nums = 0
         self.store = "bin"
@@ -131,6 +132,9 @@ class Resizewidget(QWidget, resizeui.Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)  # 初始化執行B視窗類下的 setupUi 函式
+        self.mInputWidth.setPlainText(str(window.resizewh[0]))
+        self.mInputHeight.setPlainText(str(window.resizewh[1]))
+        self.mInputScale.setPlainText(str(window.resizescale))
         self.mConfirmBtn.clicked.connect(self.confirm)
 
     def confirm(self):

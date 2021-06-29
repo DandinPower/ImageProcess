@@ -48,7 +48,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "設定大小"))
         self.mConfirmBtn.setText(_translate("Form", "確認變更"))
         self.mXYRadio.setText(_translate("Form", "依據長寬"))
         self.mScaleRadio.setText(_translate("Form", "依據比例"))

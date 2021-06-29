@@ -48,7 +48,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "設定範圍"))
         self.mInputX.setPlainText(_translate("Form", "0"))
         self.cuthint1.setText(_translate("Form", "左上角X"))
         self.cuthint2.setText(_translate("Form", "左上角Y"))

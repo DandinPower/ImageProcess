@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>設定範圍</string>
   </property>
   <widget class="QPlainTextEdit" name="mInputX">
    <property name="geometry">

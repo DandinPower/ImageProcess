@@ -32,6 +32,9 @@ class Ui_MainWindow(object):
         self.mResizeBtn = QtWidgets.QPushButton(self.centralwidget)
         self.mResizeBtn.setGeometry(QtCore.QRect(230, 350, 171, 31))
         self.mResizeBtn.setObjectName("mResizeBtn")
+        self.mTypeBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.mTypeBtn.setGeometry(QtCore.QRect(30, 300, 171, 31))
+        self.mTypeBtn.setObjectName("mTypeBtn")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
@@ -46,12 +49,13 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "批量圖片處理器 ver.0"))
         self.mChooseBtn.setText(_translate("MainWindow", "選取圖片"))
         self.label.setText(_translate("MainWindow", "尚未選取圖片"))
         self.mFlipBtn.setText(_translate("MainWindow", "翻轉圖片"))
         self.mCutBtn.setText(_translate("MainWindow", "剪裁圖片"))
         self.mResizeBtn.setText(_translate("MainWindow", "變更大小"))
+        self.mTypeBtn.setText(_translate("MainWindow", "設定轉檔格式"))
 
 
 if __name__ == "__main__":

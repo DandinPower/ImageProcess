@@ -15,6 +15,22 @@ class Main(QMainWindow, ui.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.mTransBar.setRange(0, 100)
+        self.mChooseBtn.clicked.connect(self.image_choose)
+        self.mFlipBtn.clicked.connect(self.flip_item)
+        self.mCutBtn.clicked.connect(self.cut_item)
+        self.mResizeBtn.clicked.connect(self.resize_item)
+        self.mTypeBtn.clicked.connect(self.go_type)
+        self.onBeginState()
+
+    def initialize(self):
+        self.label.setText("Success")
+        self.mTransBar.setValue(100)
+        self.storetype = "Default"
+        self.setBtn(False)
+        self.setTypeText(self.storetype)
+
+    def onBeginState(self):
         self.storetype = "Default"
         self.start = False
         self.source = []
@@ -24,12 +40,6 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.resizewh = [0, 0]
         self.resizescale = 0
         self.progress = 0
-        self.mTransBar.setRange(0, 100)
-        self.mChooseBtn.clicked.connect(self.image_choose)
-        self.mFlipBtn.clicked.connect(self.flip_item)
-        self.mCutBtn.clicked.connect(self.cut_item)
-        self.mResizeBtn.clicked.connect(self.resize_item)
-        self.mTypeBtn.clicked.connect(self.go_type)
         self.mTransBar.setValue(0)
         self.setTypeText(self.storetype)
         self.setBtn(False)
@@ -40,9 +50,6 @@ class Main(QMainWindow, ui.Ui_MainWindow):
     def setTypeText(self, type):
         self.mTypeHint.setText("目前轉檔格式設定為: " + type)
 
-    def getType(self):
-        return self.storetype
-
     def setBtn(self, flag):
         self.mFlipBtn.setEnabled(flag)
         self.mCutBtn.setEnabled(flag)
@@ -51,21 +58,24 @@ class Main(QMainWindow, ui.Ui_MainWindow):
     def setType(self, type):
         self.storetype = type
 
+    def setCutParm(self, input):
+        self.cutparm[0] = int(input[0])
+        self.cutparm[1] = int(input[1])
+        self.cutparm[2] = int(input[2])
+        self.cutparm[3] = int(input[3])
+
+    def setResizeParm(self, type, input):
+        # type為True為x,y
+        if (type == True):
+            self.resizewh = [int(input[0]), int(input[1])]
+        else:
+            self.resizescale = float(input)
+
+    def getType(self):
+        return self.storetype
+
     def go_type(self):
         editType.show()
-
-    def image_choose(self):
-        self.source, ok1 = QFileDialog.getOpenFileNames(self,
-                                                        "檔案選擇",
-                                                        "./",
-                                                        "Png Files (*.png);;Jpg Files (*.jpg);;Bmp Files (*.bmp)")
-        self.nums = len(self.source)
-        showtext = ""
-        for i in range(self.nums):
-            showtext = showtext + self.source[i] + "\n"
-        self.label.setText(showtext)
-        if(showtext != ""):
-            self.setBtn(True)
 
     def flip_item(self):
         self.store = QFileDialog.getExistingDirectory(self,
@@ -81,23 +91,32 @@ class Main(QMainWindow, ui.Ui_MainWindow):
             storename = self.store + "/" + str(i) + "." + storetype
             cv2.imwrite(storename, img)
             self.mTransBar.setValue(self.countBarValue(i, self.nums))
-        self.label.setText("Success")
-        self.mTransBar.setValue(100)
-        self.storetype = "Default"
-        self.setBtn(False)
-        self.setTypeText(self.storetype)
-
-    def setCutParm(self, input):
-        self.cutparm[0] = int(input[0])
-        self.cutparm[1] = int(input[1])
-        self.cutparm[2] = int(input[2])
-        self.cutparm[3] = int(input[3])
+        self.initialize()
 
     def cut_item(self):
         self.store = QFileDialog.getExistingDirectory(self,
                                                       "儲存位置",
                                                       "./")
         cut.show()
+
+    def resize_item(self):
+        self.store = QFileDialog.getExistingDirectory(self,
+                                                      "儲存位置",
+                                                      "./")
+        resize.show()
+
+    def image_choose(self):
+        self.source, ok1 = QFileDialog.getOpenFileNames(self,
+                                                        "檔案選擇",
+                                                        "./",
+                                                        "Png Files (*.png);;Jpg Files (*.jpg);;Bmp Files (*.bmp)")
+        self.nums = len(self.source)
+        showtext = ""
+        for i in range(self.nums):
+            showtext = showtext + self.source[i] + "\n"
+        self.label.setText(showtext)
+        if(showtext != ""):
+            self.setBtn(True)
 
     def continue_cut(self):
         self.label.setText("Transforming")
@@ -111,24 +130,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
             storename = self.store + "/" + str(i) + "." + storetype
             cv2.imwrite(storename, img)
             self.mTransBar.setValue(self.countBarValue(i, self.nums))
-        self.label.setText("Success")
-        self.mTransBar.setValue(100)
-        self.storetype = "Default"
-        self.setBtn(False)
-        self.setTypeText(self.storetype)
-
-    def setResizeParm(self, type, input):
-        # type為True為x,y
-        if (type == True):
-            self.resizewh = [int(input[0]), int(input[1])]
-        else:
-            self.resizescale = float(input)
-
-    def resize_item(self):
-        self.store = QFileDialog.getExistingDirectory(self,
-                                                      "儲存位置",
-                                                      "./")
-        resize.show()
+        self.initialize()
 
     def continue_resize(self, type):
         self.label.setText("Transforming")
@@ -155,11 +157,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                 storename = self.store + "/" + str(i) + "." + storetype
                 cv2.imwrite(storename, img)
                 self.mTransBar.setValue(self.countBarValue(i, self.nums))
-        self.label.setText("Success")
-        self.mTransBar.setValue(100)
-        self.storetype = "Default"
-        self.setBtn(False)
-        self.setTypeText(self.storetype)
+        self.initialize()
 
     def closeEvent(self, event):
         QApplication.closeAllWindows()

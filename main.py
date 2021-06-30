@@ -2,9 +2,10 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-import Image as IMG
 import cv2
 import numpy as np
+import re
+import Image as IMG
 import window as ui
 import cut as cutui
 import resize as resizeui
@@ -77,6 +78,12 @@ class Main(QMainWindow, ui.Ui_MainWindow):
     def go_type(self):
         editType.show()
 
+    def go_wrong(self):
+        reply = QMessageBox.critical(self, "錯誤訊息", "路徑或檔名含有中文\n請問是否重新選取?",
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if(reply == QMessageBox.Yes):
+            self.image_choose()
+
     def flip_item(self):
         self.store = QFileDialog.getExistingDirectory(self,
                                                       "儲存位置",
@@ -112,11 +119,20 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                                                         "Png Files (*.png);;Jpg Files (*.jpg);;Bmp Files (*.bmp)")
         self.nums = len(self.source)
         showtext = ""
+        isCh = False
         for i in range(self.nums):
+            for ch in self.source[i]:
+                if re.compile(u'[\u4e00-\u9fa5]+').search(ch):
+                    self.go_wrong()
+                    isCh = True
+                    break
+            if(isCh):
+                break
             showtext = showtext + self.source[i] + "\n"
-        self.label.setText(showtext)
-        if(showtext != ""):
-            self.setBtn(True)
+        if(isCh == False):
+            self.label.setText(showtext)
+            if(showtext != ""):
+                self.setBtn(True)
 
     def continue_cut(self):
         self.label.setText("Transforming")

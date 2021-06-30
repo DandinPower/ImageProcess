@@ -4,10 +4,12 @@
 
 #使用說明
 
-pip install pyqt5
-pip install PyQt5-sip
-pip install pyqt5-tools
-pip install opencv
-pip install numpy
+* 安裝函示庫
+  * pip install pyqt5
+  * pip install PyQt5-sip
+  * pip install pyqt5-tools
+  * pip install opencv
+  * pip install numpy
 
-運行main.py來執行程式
+* 執行主程式
+  * 運行main.py來執行程式

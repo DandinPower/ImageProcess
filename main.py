@@ -23,13 +23,19 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.cutparm = [0, 0, 0, 0]
         self.resizewh = [0, 0]
         self.resizescale = 0
+        self.progress = 0
+        self.mTransBar.setRange(0, 100)
         self.mChooseBtn.clicked.connect(self.image_choose)
         self.mFlipBtn.clicked.connect(self.flip_item)
         self.mCutBtn.clicked.connect(self.cut_item)
         self.mResizeBtn.clicked.connect(self.resize_item)
         self.mTypeBtn.clicked.connect(self.go_type)
+        self.mTransBar.setValue(0)
         self.setTypeText(self.storetype)
         self.setBtn(False)
+
+    def countBarValue(self, now, end):
+        return int(100 * (now/end))
 
     def setTypeText(self, type):
         self.mTypeHint.setText("目前轉檔格式設定為: " + type)
@@ -65,6 +71,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.store = QFileDialog.getExistingDirectory(self,
                                                       "儲存位置",
                                                       "./")
+        self.label.setText("Transforming")
         for i in range(self.nums):
             img = cv2.imread(self.source[i])
             img = IMG.flip(img)
@@ -73,7 +80,9 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                 storetype = self.storetype
             storename = self.store + "/" + str(i) + "." + storetype
             cv2.imwrite(storename, img)
-            self.label.setText("Success")
+            self.mTransBar.setValue(self.countBarValue(i, self.nums))
+        self.label.setText("Success")
+        self.mTransBar.setValue(100)
         self.storetype = "Default"
         self.setBtn(False)
         self.setTypeText(self.storetype)
@@ -91,6 +100,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         cut.show()
 
     def continue_cut(self):
+        self.label.setText("Transforming")
         for i in range(self.nums):
             img = cv2.imread(self.source[i])
             img = IMG.Cutimage(
@@ -100,7 +110,9 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                 storetype = self.storetype
             storename = self.store + "/" + str(i) + "." + storetype
             cv2.imwrite(storename, img)
-            self.label.setText("Success")
+            self.mTransBar.setValue(self.countBarValue(i, self.nums))
+        self.label.setText("Success")
+        self.mTransBar.setValue(100)
         self.storetype = "Default"
         self.setBtn(False)
         self.setTypeText(self.storetype)
@@ -119,6 +131,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         resize.show()
 
     def continue_resize(self, type):
+        self.label.setText("Transforming")
         # type為True為x,y
         if (type == True):
             for i in range(self.nums):
@@ -130,7 +143,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                     storetype = self.storetype
                 storename = self.store + "/" + str(i) + "." + storetype
                 cv2.imwrite(storename, img)
-            self.label.setText("Success")
+                self.mTransBar.setValue(self.countBarValue(i, self.nums))
 
         else:
             for i in range(self.nums):
@@ -141,7 +154,9 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                     storetype = self.storetype
                 storename = self.store + "/" + str(i) + "." + storetype
                 cv2.imwrite(storename, img)
-            self.label.setText("Success")
+                self.mTransBar.setValue(self.countBarValue(i, self.nums))
+        self.label.setText("Success")
+        self.mTransBar.setValue(100)
         self.storetype = "Default"
         self.setBtn(False)
         self.setTypeText(self.storetype)
@@ -167,8 +182,8 @@ class Cutwidget(QWidget, cutui.Ui_Form):
         tempParm.append(self.mInputWidth.toPlainText())
         tempParm.append(self.mInputHeight.toPlainText())
         window.setCutParm(tempParm)
-        window.continue_cut()
         self.close()
+        window.continue_cut()
 
 
 class Resizewidget(QWidget, resizeui.Ui_Form):
@@ -191,8 +206,8 @@ class Resizewidget(QWidget, resizeui.Ui_Form):
             type = False
             tempParm = self.mInputScale.toPlainText()
         window.setResizeParm(type, tempParm)
-        window.continue_resize(type)
         self.close()
+        window.continue_resize(type)
 
 
 class Typewidget(QWidget, typeui.Ui_Form):

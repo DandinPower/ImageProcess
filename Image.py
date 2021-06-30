@@ -75,8 +75,3 @@ def drag(img, Width, Height):
     img2[newY:newY+OriginHeight, newX:newX +
          OriginWidth] = img[0:OriginHeight, 0:OriginWidth]
     return img2
-
-
-def type(name, type):
-    names = name.split('.')
-    return names[0]+type

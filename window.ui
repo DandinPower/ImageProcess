@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="mChooseBtn">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>250</y>
+      <x>40</x>
+      <y>210</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="mFlipBtn">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>250</y>
+      <x>240</x>
+      <y>210</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QPushButton" name="mCutBtn">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>300</y>
+      <x>240</x>
+      <y>260</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -69,8 +69,8 @@
    <widget class="QPushButton" name="mResizeBtn">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>350</y>
+      <x>240</x>
+      <y>310</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -82,14 +82,27 @@
    <widget class="QPushButton" name="mTypeBtn">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>300</y>
+      <x>40</x>
+      <y>260</y>
       <width>171</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>設定轉檔格式</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="mTypeHint">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>310</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目前轉檔格式設定為: </string>
     </property>
    </widget>
   </widget>

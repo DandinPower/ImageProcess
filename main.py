@@ -28,6 +28,19 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.mCutBtn.clicked.connect(self.cut_item)
         self.mResizeBtn.clicked.connect(self.resize_item)
         self.mTypeBtn.clicked.connect(self.go_type)
+        self.setTypeText(self.storetype)
+        self.setBtn(False)
+
+    def setTypeText(self, type):
+        self.mTypeHint.setText("目前轉檔格式設定為: " + type)
+
+    def getType(self):
+        return self.storetype
+
+    def setBtn(self, flag):
+        self.mFlipBtn.setEnabled(flag)
+        self.mCutBtn.setEnabled(flag)
+        self.mResizeBtn.setEnabled(flag)
 
     def setType(self, type):
         self.storetype = type
@@ -45,6 +58,8 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         for i in range(self.nums):
             showtext = showtext + self.source[i] + "\n"
         self.label.setText(showtext)
+        if(showtext != ""):
+            self.setBtn(True)
 
     def flip_item(self):
         self.store = QFileDialog.getExistingDirectory(self,
@@ -60,6 +75,8 @@ class Main(QMainWindow, ui.Ui_MainWindow):
             cv2.imwrite(storename, img)
             self.label.setText("Success")
         self.storetype = "Default"
+        self.setBtn(False)
+        self.setTypeText(self.storetype)
 
     def setCutParm(self, input):
         self.cutparm[0] = int(input[0])
@@ -85,6 +102,8 @@ class Main(QMainWindow, ui.Ui_MainWindow):
             cv2.imwrite(storename, img)
             self.label.setText("Success")
         self.storetype = "Default"
+        self.setBtn(False)
+        self.setTypeText(self.storetype)
 
     def setResizeParm(self, type, input):
         # type為True為x,y
@@ -124,6 +143,8 @@ class Main(QMainWindow, ui.Ui_MainWindow):
                 cv2.imwrite(storename, img)
             self.label.setText("Success")
         self.storetype = "Default"
+        self.setBtn(False)
+        self.setTypeText(self.storetype)
 
     def closeEvent(self, event):
         QApplication.closeAllWindows()
@@ -189,6 +210,7 @@ class Typewidget(QWidget, typeui.Ui_Form):
             window.setType("Bmp")
         else:
             window.setType("Default")
+        window.setTypeText(window.getType())
         self.close()
 
 

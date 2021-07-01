@@ -252,7 +252,7 @@ class Listwidget(QWidget, listui.Ui_Form):
             isNotCh = True
             for ch in self.source[i]:
                 if re.compile(u'[\u4e00-\u9fa5]+').search(ch):
-                    self.go_wrong()
+                    self.go_wrong(self.source[i])
                     isNotCh = False
                     break
             if(isNotCh):
@@ -273,9 +273,9 @@ class Listwidget(QWidget, listui.Ui_Form):
         self.data.clear()
         self.mShowList.clear()
 
-    def go_wrong(self):
-        reply = QMessageBox.critical(self, "錯誤訊息", "路徑或檔名含有中文\n請問是否繼續選取?",
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+    def go_wrong(self, text):
+        reply = QMessageBox.critical(
+            self, "錯誤訊息", text + "\n路徑或檔名含有中文無法讀取,請更改檔名或路徑")
         if(reply == QMessageBox.Yes):
             self.image_choose()
 

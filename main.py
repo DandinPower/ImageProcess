@@ -30,8 +30,6 @@ class Main(QMainWindow, ui.Ui_MainWindow):
     def initialize(self):
         self.mProgressHint.setText("Success!!")
         self.mTransBar.setValue(100)
-        self.storetype = "Default"
-        self.setTypeText(self.storetype)
 
     def onBeginState(self):
         self.storetype = "Default"
@@ -56,6 +54,9 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         if(self.nums != 0):
             self.mSystemHint.setText("已選取圖片")
             self.setBtn(True)
+        else:
+            self.mSystemHint.setText("尚未選取圖片")
+            self.setBtn(False)
 
     def setTypeText(self, type):
         self.mTypeHint.setText("目前轉檔格式設定為: " + type)
@@ -235,7 +236,8 @@ class Listwidget(QWidget, listui.Ui_Form):
         super().__init__()
         self.setupUi(self)  # 初始化執行B視窗類下的 setupUi 函式
         self.mAddBtn.clicked.connect(self.image_choose)
-        self.mConfirmBtn.clicked.connect(self.confirm)
+        self.mDeleteAllBtn.clicked.connect(self.delete_all)
+        self.mDeleteBtn.clicked.connect(self.delete)
         self.source = list()
         self.data = list()
         self.nums = 0
@@ -261,15 +263,24 @@ class Listwidget(QWidget, listui.Ui_Form):
         for index in self.data:
             self.mShowList.addItem(index)
 
+    def delete(self):
+        self.data.remove(self.data[self.mShowList.currentRow()])
+        self.mShowList.clear()
+        for index in self.data:
+            self.mShowList.addItem(index)
+
+    def delete_all(self):
+        self.data.clear()
+        self.mShowList.clear()
+
     def go_wrong(self):
         reply = QMessageBox.critical(self, "錯誤訊息", "路徑或檔名含有中文\n請問是否繼續選取?",
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         if(reply == QMessageBox.Yes):
             self.image_choose()
 
-    def confirm(self):
+    def closeEvent(self, event):
         window.setSource(self.data)
-        self.close()
 
 
 if __name__ == '__main__':

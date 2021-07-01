@@ -8,7 +8,8 @@
   * pip install pyqt5
   * pip install PyQt5-sip
   * pip install pyqt5-tools
-  * pip install opencv
+  * pip install opencv-python
+  * pip install opencv-contrib-python
   * pip install numpy
 
 * 執行主程式

@@ -15,6 +15,8 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(400, 300)
+        Form.setMinimumSize(QtCore.QSize(400, 300))
+        Form.setMaximumSize(QtCore.QSize(400, 300))
         self.mInputX = QtWidgets.QPlainTextEdit(Form)
         self.mInputX.setGeometry(QtCore.QRect(110, 80, 71, 31))
         self.mInputX.setObjectName("mInputX")

@@ -15,6 +15,8 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(400, 300)
+        Form.setMinimumSize(QtCore.QSize(400, 300))
+        Form.setMaximumSize(QtCore.QSize(400, 300))
         self.mConfirmBtn = QtWidgets.QPushButton(Form)
         self.mConfirmBtn.setGeometry(QtCore.QRect(150, 220, 91, 31))
         self.mConfirmBtn.setObjectName("mConfirmBtn")

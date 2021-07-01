@@ -15,6 +15,8 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(400, 300)
+        Form.setMinimumSize(QtCore.QSize(400, 300))
+        Form.setMaximumSize(QtCore.QSize(400, 300))
         self.mPngRadio = QtWidgets.QRadioButton(Form)
         self.mPngRadio.setGeometry(QtCore.QRect(190, 60, 83, 16))
         self.mPngRadio.setObjectName("mPngRadio")

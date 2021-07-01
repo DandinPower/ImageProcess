@@ -13,6 +13,7 @@ import cut as cutui
 import resize as resizeui
 import type as typeui
 import list as listui
+import imageshow as imageshowui
 
 
 class Main(QMainWindow, ui.Ui_MainWindow):
@@ -238,6 +239,7 @@ class Listwidget(QWidget, listui.Ui_Form):
         self.mAddBtn.clicked.connect(self.image_choose)
         self.mDeleteAllBtn.clicked.connect(self.delete_all)
         self.mDeleteBtn.clicked.connect(self.delete)
+        self.mShowImageBtn.clicked.connect(self.image_show)
         self.source = list()
         self.data = list()
         self.nums = 0
@@ -279,8 +281,28 @@ class Listwidget(QWidget, listui.Ui_Form):
         if(reply == QMessageBox.Yes):
             self.image_choose()
 
+    def image_show(self):
+        tempimg = cv2.imread(self.data[self.mShowList.currentRow()])
+        height, width, ret = tempimg.shape
+        imageshow.resize(width, height)
+        imageshow.setImage(
+            self.data[self.mShowList.currentRow()], width, height)
+        imageshow.show()
+
     def closeEvent(self, event):
         window.setSource(self.data)
+
+
+class ImageShowwidget(QWidget, imageshowui.Ui_Form):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)  # 初始化執行B視窗類下的 setupUi 函式
+        self.image = ""
+
+    def setImage(self, str, width, height):
+        self.image = str
+        self.mShowImage.resize(width, height)
+        self.mShowImage.setPixmap(QPixmap(self.image))
 
 
 if __name__ == '__main__':
@@ -291,5 +313,6 @@ if __name__ == '__main__':
     resize = Resizewidget()
     editType = Typewidget()
     listShow = Listwidget()
+    imageshow = ImageShowwidget()
     window.show()
     sys.exit(app.exec_())

@@ -1,3 +1,4 @@
+from typing import List
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -5,11 +6,13 @@ from PyQt5.QtGui import *
 import cv2
 import numpy as np
 import re
+import time
 import Image as IMG
 import window as ui
 import cut as cutui
 import resize as resizeui
 import type as typeui
+import list as listui
 
 
 class Main(QMainWindow, ui.Ui_MainWindow):
@@ -17,18 +20,17 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.mTransBar.setRange(0, 100)
-        self.mChooseBtn.clicked.connect(self.image_choose)
         self.mFlipBtn.clicked.connect(self.flip_item)
         self.mCutBtn.clicked.connect(self.cut_item)
         self.mResizeBtn.clicked.connect(self.resize_item)
         self.mTypeBtn.clicked.connect(self.go_type)
+        self.mShowBtn.clicked.connect(self.list_show)
         self.onBeginState()
 
     def initialize(self):
-        self.label.setText("Success")
+        self.mProgressHint.setText("Success!!")
         self.mTransBar.setValue(100)
         self.storetype = "Default"
-        self.setBtn(False)
         self.setTypeText(self.storetype)
 
     def onBeginState(self):
@@ -47,6 +49,13 @@ class Main(QMainWindow, ui.Ui_MainWindow):
 
     def countBarValue(self, now, end):
         return int(100 * (now/end))
+
+    def setSource(self, list):
+        self.source = list
+        self.nums = len(self.source)
+        if(self.nums != 0):
+            self.mSystemHint.setText("已選取圖片")
+            self.setBtn(True)
 
     def setTypeText(self, type):
         self.mTypeHint.setText("目前轉檔格式設定為: " + type)
@@ -78,64 +87,42 @@ class Main(QMainWindow, ui.Ui_MainWindow):
     def go_type(self):
         editType.show()
 
-    def go_wrong(self):
-        reply = QMessageBox.critical(self, "錯誤訊息", "路徑或檔名含有中文\n請問是否重新選取?",
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
-        if(reply == QMessageBox.Yes):
-            self.image_choose()
-
     def flip_item(self):
         self.store = QFileDialog.getExistingDirectory(self,
                                                       "儲存位置",
                                                       "./")
-        self.label.setText("Transforming")
-        for i in range(self.nums):
-            img = cv2.imread(self.source[i])
-            img = IMG.flip(img)
-            storetype = self.source[i].split('.')[1]
-            if(self.storetype != "Default"):
-                storetype = self.storetype
-            storename = self.store + "/" + str(i) + "." + storetype
-            cv2.imwrite(storename, img)
-            self.mTransBar.setValue(self.countBarValue(i, self.nums))
-        self.initialize()
+        if (self.store != ""):
+            self.mProgressHint.setText("Transforming")
+            for i in range(self.nums):
+                img = cv2.imread(self.source[i])
+                img = IMG.flip(img)
+                storetype = self.source[i].split('.')[1]
+                if(self.storetype != "Default"):
+                    storetype = self.storetype
+                storename = self.store + "/" + str(i) + "." + storetype
+                cv2.imwrite(storename, img)
+                self.mTransBar.setValue(self.countBarValue(i, self.nums))
+            self.initialize()
 
     def cut_item(self):
         self.store = QFileDialog.getExistingDirectory(self,
                                                       "儲存位置",
                                                       "./")
-        cut.show()
+        if (self.store != ""):
+            cut.show()
 
     def resize_item(self):
         self.store = QFileDialog.getExistingDirectory(self,
                                                       "儲存位置",
                                                       "./")
-        resize.show()
+        if (self.store != ""):
+            resize.show()
 
-    def image_choose(self):
-        self.source, ok1 = QFileDialog.getOpenFileNames(self,
-                                                        "檔案選擇",
-                                                        "./",
-                                                        "Png Files (*.png);;Jpg Files (*.jpg);;Bmp Files (*.bmp)")
-        self.nums = len(self.source)
-        showtext = ""
-        isCh = False
-        for i in range(self.nums):
-            for ch in self.source[i]:
-                if re.compile(u'[\u4e00-\u9fa5]+').search(ch):
-                    self.go_wrong()
-                    isCh = True
-                    break
-            if(isCh):
-                break
-            showtext = showtext + self.source[i] + "\n"
-        if(isCh == False):
-            self.label.setText(showtext)
-            if(showtext != ""):
-                self.setBtn(True)
+    def list_show(self):
+        listShow.show()
 
     def continue_cut(self):
-        self.label.setText("Transforming")
+        self.mProgressHint.setText("Transforming")
         for i in range(self.nums):
             img = cv2.imread(self.source[i])
             img = IMG.Cutimage(
@@ -149,7 +136,7 @@ class Main(QMainWindow, ui.Ui_MainWindow):
         self.initialize()
 
     def continue_resize(self, type):
-        self.label.setText("Transforming")
+        self.mProgressHint.setText("Transforming")
         # type為True為x,y
         if (type == True):
             for i in range(self.nums):
@@ -243,6 +230,48 @@ class Typewidget(QWidget, typeui.Ui_Form):
         self.close()
 
 
+class Listwidget(QWidget, listui.Ui_Form):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)  # 初始化執行B視窗類下的 setupUi 函式
+        self.mAddBtn.clicked.connect(self.image_choose)
+        self.mConfirmBtn.clicked.connect(self.confirm)
+        self.source = list()
+        self.data = list()
+        self.nums = 0
+
+    def image_choose(self):
+        self.source, ok1 = QFileDialog.getOpenFileNames(self,
+                                                        "檔案選擇",
+                                                        "./",
+                                                        "Png Files (*.png);;Jpg Files (*.jpg);;Bmp Files (*.bmp)")
+        self.nums = len(self.source)
+        for i in range(self.nums):
+            isNotCh = True
+            for ch in self.source[i]:
+                if re.compile(u'[\u4e00-\u9fa5]+').search(ch):
+                    self.go_wrong()
+                    isNotCh = False
+                    break
+            if(isNotCh):
+                sourceset = set(self.data)
+                if not (self.source[i] in sourceset):
+                    self.data.append(self.source[i])
+        self.mShowList.clear()
+        for index in self.data:
+            self.mShowList.addItem(index)
+
+    def go_wrong(self):
+        reply = QMessageBox.critical(self, "錯誤訊息", "路徑或檔名含有中文\n請問是否繼續選取?",
+                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if(reply == QMessageBox.Yes):
+            self.image_choose()
+
+    def confirm(self):
+        window.setSource(self.data)
+        self.close()
+
+
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -250,5 +279,6 @@ if __name__ == '__main__':
     cut = Cutwidget()
     resize = Resizewidget()
     editType = Typewidget()
+    listShow = Listwidget()
     window.show()
     sys.exit(app.exec_())

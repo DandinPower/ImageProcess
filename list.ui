@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>529</width>
+    <height>402</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>529</width>
+    <height>402</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>529</width>
+    <height>402</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>設定圖片</string>
+  </property>
+  <widget class="QListWidget" name="mShowList">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>361</width>
+     <height>381</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mAddBtn">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>70</y>
+     <width>90</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>新增圖片</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mDeleteBtn">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>130</y>
+     <width>90</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>刪除圖片</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mDeleteAllBtn">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>190</y>
+     <width>90</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>刪除全部</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mConfirmBtn">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>250</y>
+     <width>90</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>確認修改</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mShowImageBtn">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>310</y>
+     <width>90</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>顯示選取圖片</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

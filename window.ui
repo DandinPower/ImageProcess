@@ -6,34 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>798</width>
     <height>600</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>798</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>798</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>批量圖片處理器 ver.0</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="mChooseBtn">
+   <widget class="QLabel" name="mSystemHint">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>210</y>
-      <width>171</width>
+      <x>220</x>
+      <y>340</y>
+      <width>81</width>
       <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>選取圖片</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>40</y>
-      <width>321</width>
-      <height>441</height>
      </rect>
     </property>
     <property name="text">
@@ -43,8 +42,8 @@
    <widget class="QPushButton" name="mFlipBtn">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>210</y>
+      <x>430</x>
+      <y>200</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -56,8 +55,8 @@
    <widget class="QPushButton" name="mCutBtn">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>260</y>
+      <x>430</x>
+      <y>250</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -69,8 +68,8 @@
    <widget class="QPushButton" name="mResizeBtn">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>310</y>
+      <x>430</x>
+      <y>300</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -82,8 +81,8 @@
    <widget class="QPushButton" name="mTypeBtn">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>260</y>
+      <x>170</x>
+      <y>250</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -95,8 +94,8 @@
    <widget class="QLabel" name="mTypeHint">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>310</y>
+      <x>180</x>
+      <y>300</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -118,13 +117,39 @@
      <number>24</number>
     </property>
    </widget>
+   <widget class="QPushButton" name="mShowBtn">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>200</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>設定圖片</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="mProgressHint">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>460</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>798</width>
      <height>21</height>
     </rect>
    </property>

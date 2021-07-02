@@ -17,7 +17,12 @@ class Ui_MainWindow(object):
         MainWindow.resize(798, 600)
         MainWindow.setMinimumSize(QtCore.QSize(798, 600))
         MainWindow.setMaximumSize(QtCore.QSize(798, 600))
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setStyleSheet("QWidget\n"
+"{\n"
+"    background-color: rgba(46,46,46,50);\n"
+"}")
         self.centralwidget.setObjectName("centralwidget")
         self.mSystemHint = QtWidgets.QLabel(self.centralwidget)
         self.mSystemHint.setGeometry(QtCore.QRect(220, 340, 81, 31))
@@ -43,6 +48,19 @@ class Ui_MainWindow(object):
         self.mTransBar.setObjectName("mTransBar")
         self.mShowBtn = QtWidgets.QPushButton(self.centralwidget)
         self.mShowBtn.setGeometry(QtCore.QRect(170, 200, 171, 31))
+        self.mShowBtn.setStyleSheet("QPushButton\n"
+"{\n"
+"    background-color: rgba(0,255,255,100);\n"
+"    border-radius:8px;\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgba(0,220,255,100);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"    background-color: rgba(0,150,255,100);\n"
+"}")
         self.mShowBtn.setObjectName("mShowBtn")
         self.mProgressHint = QtWidgets.QLabel(self.centralwidget)
         self.mProgressHint.setGeometry(QtCore.QRect(360, 460, 91, 21))

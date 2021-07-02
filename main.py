@@ -197,6 +197,12 @@ class Resizewidget(QWidget, resizeui.Ui_Form):
         self.mInputHeight.setPlainText(str(window.resizewh[1]))
         self.mInputScale.setPlainText(str(window.resizescale))
         self.mConfirmBtn.clicked.connect(self.confirm)
+        self.mConfirmBtn.setEnabled(False)
+        self.mXYRadio.clicked.connect(self.setBtn)
+        self.mScaleRadio.clicked.connect(self.setBtn)
+
+    def setBtn(self):
+        self.mConfirmBtn.setEnabled(True)
 
     def confirm(self):
         type = True

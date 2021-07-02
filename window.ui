@@ -25,7 +25,16 @@
   <property name="windowTitle">
    <string>批量圖片處理器 ver.0</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget
+{
+	background-color: rgba(46,46,46,50);
+}</string>
+   </property>
    <widget class="QLabel" name="mSystemHint">
     <property name="geometry">
      <rect>
@@ -125,6 +134,21 @@
       <width>171</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	background-color: rgba(0,255,255,100);
+	border-radius:8px;
+}
+QPushButton:hover
+{
+	background-color: rgba(0,220,255,100);
+}
+QPushButton:pressed
+{
+	background-color: rgba(0,150,255,100);
+}</string>
     </property>
     <property name="text">
      <string>設定圖片</string>

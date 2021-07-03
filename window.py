@@ -21,7 +21,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("QWidget\n"
 "{\n"
-"    background-color: rgba(46,46,46,50);\n"
+"    background-color: rgba(46,46,70,255);\n"
 "}")
         self.centralwidget.setObjectName("centralwidget")
         self.mSystemHint = QtWidgets.QLabel(self.centralwidget)
@@ -29,15 +29,84 @@ class Ui_MainWindow(object):
         self.mSystemHint.setObjectName("mSystemHint")
         self.mFlipBtn = QtWidgets.QPushButton(self.centralwidget)
         self.mFlipBtn.setGeometry(QtCore.QRect(430, 200, 171, 31))
+        self.mFlipBtn.setStyleSheet("QPushButton\n"
+"{\n"
+"    background-color: rgba(0,255,255,150);\n"
+"    border-radius:8px;\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(255,255,255,255);\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgba(0,220,255,150);\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(150,150,150,255);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"    background-color: rgba(0,150,255,150);\n"
+"}\n"
+"")
         self.mFlipBtn.setObjectName("mFlipBtn")
         self.mCutBtn = QtWidgets.QPushButton(self.centralwidget)
         self.mCutBtn.setGeometry(QtCore.QRect(430, 250, 171, 31))
+        self.mCutBtn.setStyleSheet("QPushButton\n"
+"{\n"
+"    background-color: rgba(0,255,255,150);\n"
+"    border-radius:8px;\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(255,255,255,255);\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgba(0,220,255,150);\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(150,150,150,255);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"    background-color: rgba(0,150,255,150);\n"
+"}")
         self.mCutBtn.setObjectName("mCutBtn")
         self.mResizeBtn = QtWidgets.QPushButton(self.centralwidget)
         self.mResizeBtn.setGeometry(QtCore.QRect(430, 300, 171, 31))
+        self.mResizeBtn.setStyleSheet("QPushButton\n"
+"{\n"
+"    background-color: rgba(0,255,255,150);\n"
+"    border-radius:8px;\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(255,255,255,255);\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgba(0,220,255,150);\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(150,150,150,255);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"    background-color: rgba(0,150,255,150);\n"
+"}")
         self.mResizeBtn.setObjectName("mResizeBtn")
         self.mTypeBtn = QtWidgets.QPushButton(self.centralwidget)
         self.mTypeBtn.setGeometry(QtCore.QRect(170, 250, 171, 31))
+        self.mTypeBtn.setStyleSheet("QPushButton\n"
+"{\n"
+"    background-color: rgba(0,255,255,150);\n"
+"    border-radius:8px;\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(255,255,255,255);\n"
+"}\n"
+"QPushButton:hover\n"
+"{\n"
+"    background-color: rgba(0,220,255,150);\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(150,150,150,255);\n"
+"}\n"
+"QPushButton:pressed\n"
+"{\n"
+"    background-color: rgba(0,150,255,150);\n"
+"}")
         self.mTypeBtn.setObjectName("mTypeBtn")
         self.mTypeHint = QtWidgets.QLabel(self.centralwidget)
         self.mTypeHint.setGeometry(QtCore.QRect(180, 300, 171, 31))
@@ -50,16 +119,20 @@ class Ui_MainWindow(object):
         self.mShowBtn.setGeometry(QtCore.QRect(170, 200, 171, 31))
         self.mShowBtn.setStyleSheet("QPushButton\n"
 "{\n"
-"    background-color: rgba(0,255,255,100);\n"
+"    background-color: rgba(0,255,255,150);\n"
 "    border-radius:8px;\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(255,255,255,255);\n"
 "}\n"
 "QPushButton:hover\n"
 "{\n"
-"    background-color: rgba(0,220,255,100);\n"
+"    background-color: rgba(0,220,255,150);\n"
+"    border: 2px solid;\n"
+"    border-color: rgba(150,150,150,255);\n"
 "}\n"
 "QPushButton:pressed\n"
 "{\n"
-"    background-color: rgba(0,150,255,100);\n"
+"    background-color: rgba(0,150,255,150);\n"
 "}")
         self.mShowBtn.setObjectName("mShowBtn")
         self.mProgressHint = QtWidgets.QLabel(self.centralwidget)

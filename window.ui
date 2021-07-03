@@ -32,7 +32,7 @@
    <property name="styleSheet">
     <string notr="true">QWidget
 {
-	background-color: rgba(46,46,46,50);
+	background-color: rgba(46,46,70,255);
 }</string>
    </property>
    <widget class="QLabel" name="mSystemHint">
@@ -57,6 +57,26 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	background-color: rgba(0,255,255,150);
+	border-radius:8px;
+	border: 2px solid;
+	border-color: rgba(255,255,255,255);
+}
+QPushButton:hover
+{
+	background-color: rgba(0,220,255,150);
+	border: 2px solid;
+	border-color: rgba(150,150,150,255);
+}
+QPushButton:pressed
+{
+	background-color: rgba(0,150,255,150);
+}
+</string>
+    </property>
     <property name="text">
      <string>翻轉圖片</string>
     </property>
@@ -69,6 +89,25 @@
       <width>171</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	background-color: rgba(0,255,255,150);
+	border-radius:8px;
+	border: 2px solid;
+	border-color: rgba(255,255,255,255);
+}
+QPushButton:hover
+{
+	background-color: rgba(0,220,255,150);
+	border: 2px solid;
+	border-color: rgba(150,150,150,255);
+}
+QPushButton:pressed
+{
+	background-color: rgba(0,150,255,150);
+}</string>
     </property>
     <property name="text">
      <string>剪裁圖片</string>
@@ -83,6 +122,25 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	background-color: rgba(0,255,255,150);
+	border-radius:8px;
+	border: 2px solid;
+	border-color: rgba(255,255,255,255);
+}
+QPushButton:hover
+{
+	background-color: rgba(0,220,255,150);
+	border: 2px solid;
+	border-color: rgba(150,150,150,255);
+}
+QPushButton:pressed
+{
+	background-color: rgba(0,150,255,150);
+}</string>
+    </property>
     <property name="text">
      <string>變更大小</string>
     </property>
@@ -95,6 +153,25 @@
       <width>171</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	background-color: rgba(0,255,255,150);
+	border-radius:8px;
+	border: 2px solid;
+	border-color: rgba(255,255,255,255);
+}
+QPushButton:hover
+{
+	background-color: rgba(0,220,255,150);
+	border: 2px solid;
+	border-color: rgba(150,150,150,255);
+}
+QPushButton:pressed
+{
+	background-color: rgba(0,150,255,150);
+}</string>
     </property>
     <property name="text">
      <string>設定轉檔格式</string>
@@ -138,16 +215,20 @@
     <property name="styleSheet">
      <string notr="true">QPushButton
 {
-	background-color: rgba(0,255,255,100);
+	background-color: rgba(0,255,255,150);
 	border-radius:8px;
+	border: 2px solid;
+	border-color: rgba(255,255,255,255);
 }
 QPushButton:hover
 {
-	background-color: rgba(0,220,255,100);
+	background-color: rgba(0,220,255,150);
+	border: 2px solid;
+	border-color: rgba(150,150,150,255);
 }
 QPushButton:pressed
 {
-	background-color: rgba(0,150,255,100);
+	background-color: rgba(0,150,255,150);
 }</string>
     </property>
     <property name="text">

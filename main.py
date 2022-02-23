@@ -7,13 +7,13 @@ import cv2
 import numpy as np
 import re
 import time
-import Image as IMG
-import window as ui
-import cut as cutui
-import resize as resizeui
-import type as typeui
-import list as listui
-import imageshow as imageshowui
+import model.Image as IMG
+import view.window as ui
+import view.cut as cutui
+import view.resize as resizeui
+import view.type as typeui
+import view.list as listui
+import view.imageshow as imageshowui
 
 
 class Main(QMainWindow, ui.Ui_MainWindow):

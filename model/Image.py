@@ -27,7 +27,6 @@ def isTrue(R, G, B):
         return True
     return False
 
-
 def changecolor(image):
     height, width, ret = image.shape
     for i in range(height):
@@ -75,3 +74,40 @@ def drag(img, Width, Height):
     img2[newY:newY+OriginHeight, newX:newX +
          OriginWidth] = img[0:OriginHeight, 0:OriginWidth]
     return img2
+
+
+def isChange(B, G, R):
+    if R <= 255 and R >= 140 and G <= 240 and G >= 90 and B <= 200 and B >= 0:
+        return True
+    else:
+        return False
+
+
+orange = (20, 85, 234)
+black = (56, 25, 32)
+deepblue = (58, 27, 36)
+pink = (230, 218,166)
+
+
+def changecolor_2(image):
+    height, width, ret = image.shape
+    for i in range(height):
+        for j in range(width):
+            if (isChange(image[i, j][0], image[i, j][1], image[i, j][2])):
+                image[i, j] = pink
+            else:
+                image[i, j] = black
+    return image
+
+
+def main():
+    img = cv2.imread("test/0.png")
+    img = changecolor_2(img)
+    cv2.imshow("test", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    cv2.imwrite("finish/ig2.png", img)
+
+
+if __name__ == '__main__':
+    main()
